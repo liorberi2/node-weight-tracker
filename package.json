@@ -1,5 +1,5 @@
 {
-	"name": "node-weight-tracker",
+	"name": "@liorberi2/node-weight-tracker",
 	"version": "1.0.0",
 	"description": "Sample Node.js web application using hapi, PostgreSQL, and Okta",
 	"main": "src/index.js",
