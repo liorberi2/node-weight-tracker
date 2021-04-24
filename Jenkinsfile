@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages{
-    stage('echo1') {
+    stage('initialization') {
       steps {
-        sh 'echo Test1'
+        sh 'npm init -y'
       }
     }
-    stage('echo2') {
+    stage('publish package') {
       steps {
-        sh 'echo Test2'
+        sh 'npm publish'
       }
     }
   }
