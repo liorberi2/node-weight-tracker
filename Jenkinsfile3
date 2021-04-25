@@ -1,0 +1,15 @@
+pipeline {
+  agent {label 'appslave'}
+  stages{
+    stage('Change permissions to Autoscript') {
+      steps {
+        sh 'chmod u+x ./AutoWeightTracker/WTAPPLJenkins.sh'
+      }
+    }
+    stage('Run Automation script') {
+      steps {
+        sh './AutoWeightTracker/WTAPPLJenkins.sh'
+      }
+    }
+  }
+}
