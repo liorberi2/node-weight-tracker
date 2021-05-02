@@ -1,0 +1,67 @@
+--- # node weight tracker app definition
+- hosts: webservers
+  become: yes
+  vars_files:
+    - vault.yml
+  tasks:
+    - name: check if repo exists
+      ansible.builtin.git:
+        repo: 'https://github.com/ronkaiser/node-weight-tracker.git'
+        dest: ./node-weight-tracker
+
+    - name: update nodejs package
+      ansible.builtin.shell: curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+
+    - name: install nodejs
+      apt:
+        name: nodejs
+        state: present
+
+    - name: install node dependecies
+      shell: npm install
+      args:
+        chdir: node-weight-tracker/
+
+    - name: install pm2
+      shell: npm install pm2 -g
+
+    - name: get public IP for env
+      community.general.ipify_facts:
+        timeout: 20
+
+    - name: create env file
+      copy:
+        dest: "node-weight-tracker/.env"
+        content: |
+          # Host configuration
+          PORT=8080
+          HOST=0.0.0.0
+          NODE_ENV=development
+          HOST_URL=http://{{ ipify_public_ip }}:8080
+          COOKIE_ENCRYPT_PWD=superAwesomePasswordStringThatIsAtLeast32CharactersLong!
+
+          # Okta configuration
+          OKTA_ORG_URL=https://{{ domain }}
+          OKTA_CLIENT_ID={{ clientid }}
+          OKTA_CLIENT_SECRET={{ secret }}
+
+          # Postgres configuration
+          PGHOST={{ servername }}
+          PGUSERNAME=postgres@{{ servername }}
+          PGDATABASE=postgres
+          PGPASSWORD={{ password }}
+          PGPORT=5432
+
+    - name: DB initialization
+      ansible.builtin.shell: npm run initdb
+      args:
+        chdir: "node-weight-tracker/"
+
+    - name: clear process
+      shell: pm2 delete all
+      ignore_errors: yes
+
+    - name: run application
+      shell: pm2 start npm -- run dev && pm2 save && pm2 startup
+      args:
+        chdir: node-weight-tracker/
