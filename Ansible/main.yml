@@ -6,7 +6,7 @@
   tasks:
     - name: check if repo exists
       ansible.builtin.git:
-        repo: 'https://github.com/ronkaiser/node-weight-tracker.git'
+        repo: 'https://github.com/liorberi2/node-weight-tracker-main.git'
         dest: ./node-weight-tracker
 
     - name: update nodejs package
