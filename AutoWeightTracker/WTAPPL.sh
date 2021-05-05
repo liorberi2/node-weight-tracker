@@ -1,6 +1,6 @@
 # This script will automate app installation on Linux VM
 # Usage:
-# Clone that repo using > git clone https://github.com/ronkaiser/node-weight-tracker.git
+# Clone that repo using > git clone https://github.com/liorberi2/node-weight-tracker-main.git
 # cd to > /home/linux/node-weight-tracker/AutoWeightTracker
 # run > chmod u+x WTAPPL.sh
 # run the script > ./WTAPPL.sh

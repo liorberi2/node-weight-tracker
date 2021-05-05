@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script will automate DB installation on Linux Debian based for WeightTracker app
-# Reference: https://github.com/ronkaiser/node-weight-tracker
+# Reference: https://github.com/liorberi2/node-weight-tracker-main.git
 
 # Docker installation
 

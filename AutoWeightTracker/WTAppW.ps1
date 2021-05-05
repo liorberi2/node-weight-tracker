@@ -1,6 +1,6 @@
  <#
 This script will automate WeightTracker app deployment on Windows.
-Reference: https://github.com/ronkaiser/node-weight-tracker
+Reference: https://github.com/liorberi2/node-weight-tracker-main
 #>
 
 # Set execution policy to Bypass and install Chocolatey

@@ -2,7 +2,7 @@
 #
 # <description>
 # This script will build  WeightTracker and deploy app and DB automatically.
-# WeightTracker link: https://github.com/galyakir/node-weight-tracker
+# WeightTracker link: https://github.com/liorberi2/node-weight-tracker-main.git
 # This script works at Ubuntu operation system
 
 
@@ -83,7 +83,7 @@ function installtion(){
 	# This function install using apt all the  requirements for the App.
 
 sudo apt-get install git
-git clone https://github.com/galyakir/node-weight-tracker.git
+git clone https://github.com/liorberi2/node-weight-tracker-main.git
 curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install dotenv
