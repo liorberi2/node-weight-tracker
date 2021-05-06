@@ -1,0 +1,48 @@
+pipeline {
+  agent {label 'appslave'}
+  stages{
+    stage('App configuration') {
+      steps {
+        script {
+        def userInput = input(
+          id: 'userInput', message: 'Enter Application details:',
+          parameters: [
+            string(defaultValue: 'None', description: 'Okta domain', name: 'domain'),
+            string(defaultValue: 'None', description: 'Okta client ID', name: 'clientid'),
+            string(defaultValue: 'None', description: 'Okta client secret', name: 'secret'),
+            string(defaultValue: 'None', description: 'postgres password', name: 'password'),
+            string(defaultValue: 'None', description: 'DB Server name in Azure', name: 'servername'),
+          ])
+        // Save variables
+        domain = userInput.domain?:''
+        clientid = userInput.clientid?:''
+        secret = userInput.secret?:''
+        password = userInput.password?:''
+        servername = userInput.servername?:''
+
+        //echo to console
+        echo ("Your Okta domain: ${domain}")
+        echo ("Your Okta client ID: ${clientid}")
+        echo ("Your Okta client secret: ${secret}")
+        echo ("postgres password: ${password}")
+        echo ("Your DB Server name in Azure: ${servername}")
+        
+        // export variables so bash automation script will be able to use them
+        sh 'export domain clientid secret password servername'
+        }
+      }
+    }
+    stage('Change permissions to Autoscript') {
+      steps {
+        sh 'echo chmod u+x ./AutoWeightTracker/WTAPPLJenkins.sh'
+        sh 'echo $domain'
+      }
+    }
+    stage('Run Automation script') {
+      steps {
+        sh 'echo ./AutoWeightTracker/WTAPPLJenkins.sh'
+        sh 'echo $domain'
+      }
+    }
+  }
+}
