@@ -1,13 +1,13 @@
-FROM node:16-alpine3.11
+FROM node:15-alpine
 
-RUN mkdir -p /home/מode-weight-tracker
+#crate dircetory and copy repo
+WORKDIR  /node-weight-tracker
+COPY . .
 
-COPY . /home/node-weight-tracker  
-
-WORKDIR /home/node-weight-tracker
-
+#insatlll dependencies
 RUN npm install
 
+#expose port
 EXPOSE 8080
 
 CMD npm run initdb && npm run dev
