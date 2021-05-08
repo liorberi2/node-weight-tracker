@@ -5,8 +5,8 @@ pipeline {
 
   environment {
     dockerImage =''
-    registry = 'liorberi/node-weight-tracker:v03'
-    registryCredential ='liorberi'
+    registry = 'liorberi/node-weight-tracker:$BUILD_NUMBER'
+    registryCredential ='dockerhub_id'
   }
 
   // clean environment with new files
