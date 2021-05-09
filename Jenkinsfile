@@ -19,20 +19,14 @@ pipeline {
     }
 
     // Build docker image
-    
-    docker.withRegistry('','DockerHub'){
-                        def dockerImage = docker.build registry
-                        dockerImage.push()
-                         }
-                       }
-                     }
-  //  stage('Create Docker Image') {
-  //    steps {
-   //     script {
-  //        def dockerImage = docker.build registry
-   //     }
-  //    }
-  //  }
+
+    stage('Create Docker Image') {
+      steps {
+       script {
+          def dockerImage = docker.build registry
+       }
+      }
+    }
 
     // Push the image into docker registry
     stage ('Push To Registry') {
