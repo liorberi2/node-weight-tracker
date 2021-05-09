@@ -19,12 +19,11 @@ pipeline {
     }
 
     // Build docker image
-
     stage('Create Docker Image') {
       steps {
-       script {
-          def dockerImage = docker.build registry
-       }
+        script {
+          dockerImage = docker.build registry
+        }
       }
     }
 
